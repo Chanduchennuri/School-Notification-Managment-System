@@ -11,6 +11,8 @@ const app = express();
 
 //testing models
 const stud = require('./models/student')
+const clas = require('./models/clas')
+const teacher = require('./models/teacher')
 
 // Middleware to parse request bodies
 app.use(express.json());

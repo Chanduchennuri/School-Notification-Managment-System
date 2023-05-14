@@ -22,12 +22,14 @@ const studSchema = new mongoose.Schema({
         required:true
     },
     sPhone:{
-        type:Number
+        type:Number,
+        required:true
     },
     pPhone:{
-        type:Number
+        type:Number,
+        required:true
     },
-    class:{
+    clas:{
         type:String
     }
     
