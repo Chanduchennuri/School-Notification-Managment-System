@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: 'your_secret_key',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
 }));
 
 
@@ -73,14 +73,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
 //Routes
 app.get('/auth/google',
     passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
+app.get('/auth/success',async(req,res)=>{
+    try {
+        res.json(req.session);
+    } catch (e) {
+        console.log(e);
+    }
+})
+
 app.get('/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: process.env.frontend_url }),
+    passport.authenticate('google', { failureRedirect: process.env.CLIENT_URL}),
     async (req, res) => {
         //admin login
         if(req.user._json.email==process.env.adminMail1 || req.user._json.email==process.env.adminMail2)
@@ -91,14 +98,12 @@ app.get('/auth/google/callback',
             //teacher login
             const {createTeacher , findByEmail} = require('./controllers/teacher')
             data = await findByEmail(req.user._json.email)
-            if(req.user._json.email===data.email){
+            if(req.user._json.email===data?.email){
                 req.session.role = 'teacher'
                 return
             }
         }
-
-        console.log(req.session.role)
-
+        console.log(req.session)
         // Redirect to the frontend after successful authentication
         res.redirect(process.env.frontend_url);
     }

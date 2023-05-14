@@ -6,7 +6,6 @@ async function createTeacher(){
         fName:'ABHI',
         lName:'Fadake',
         phone:7083260191
-
     })
 }
 
@@ -15,8 +14,7 @@ async function findByEmail(email){
     .catch((err) => {
         console.log(err)
     })
-    return docs
-    
+    return docs;
 }
 
 module.exports = {createTeacher , findByEmail}
