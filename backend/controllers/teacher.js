@@ -10,7 +10,7 @@ async function createTeacher(){
     })
 }
 
-async function findByEmail(email){
+async function findByEmailT(email){
     const docs = await teacher.findOne({email:email})
     .catch((err) => {
         console.log(err)
@@ -19,4 +19,4 @@ async function findByEmail(email){
     
 }
 
-module.exports = {createTeacher , findByEmail}
+module.exports = {createTeacher , findByEmailT}

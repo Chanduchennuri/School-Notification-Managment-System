@@ -25,6 +25,10 @@ const teacher = require('./models/teacher')
 // const {createTeacher} = require('./controllers/teacher.js')
 // createTeacher().then(console.log('techer created'))
 
+//create student
+// const {createStudent} = require('./controllers/student')
+// createStudent().then(console.log('student created'))
+
 // Middleware to parse request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -82,21 +86,45 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: process.env.frontend_url }),
     async (req, res) => {
+        let flag = 0
         //admin login
         if(req.user._json.email==process.env.adminMail1 || req.user._json.email==process.env.adminMail2)
         {
             req.session.role = 'admin'
+            flag = 1
         }
         else{
             //teacher login
-            const {createTeacher , findByEmail} = require('./controllers/teacher')
-            data = await findByEmail(req.user._json.email)
-            if(req.user._json.email===data.email){
+            
+            const {createTeacher , findByEmailT} = require('./controllers/teacher')
+            data = await findByEmailT(req.user._json.email)
+            if(data && req.user._json.email===data.email){
                 req.session.role = 'teacher'
-                return
+                flag = 1
             }
+            //parent and student login
+            if(flag === 0){
+                const {findByEmailS} = require('./controllers/student')
+                data1 = await findByEmailS(req.user._json.email)
+                if(data1 && req.user._json.email===data1.email){
+                    req.session.role = 'student'
+                    flag = 1
+                }
+            }
+            if(flag === 0){
+                const {findByEmailP} = require('./controllers/student')
+                data2 = await findByEmailP(req.user._json.email)
+                if(data2 && req.user._json.email===data2.parentEmail){
+                    req.session.role = 'parent'
+                    flag = 1
+                }
+            }
+            
         }
-
+        if(flag===0){
+            console.log("user not login")
+            req.logout((err) => { console.log(err) });
+        }
         console.log(req.session.role)
 
         // Redirect to the frontend after successful authentication
