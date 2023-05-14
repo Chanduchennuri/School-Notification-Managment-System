@@ -7,12 +7,23 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cors = require('cors');
 
+//mongoose db connection.
+const {connectToMongoose} = require('./db')
+connectToMongoose()
+.then(() => {
+    console.log('Mongodb connected success')
+})
+
 const app = express();
 
 //testing models
 const stud = require('./models/student')
 const clas = require('./models/clas')
 const teacher = require('./models/teacher')
+
+//create a teacher
+// const {createTeacher} = require('./controllers/teacher.js')
+// createTeacher().then(console.log('techer created'))
 
 // Middleware to parse request bodies
 app.use(express.json());
@@ -70,18 +81,25 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: process.env.frontend_url }),
-    (req, res) => {
-        // Redirect to the frontend after successful authentication
-        
-        
+    async (req, res) => {
+        //admin login
         if(req.user._json.email==process.env.adminMail1 || req.user._json.email==process.env.adminMail2)
         {
-            //admin login
             req.session.role = 'admin'
+        }
+        else{
+            //teacher login
+            const {createTeacher , findByEmail} = require('./controllers/teacher')
+            data = await findByEmail(req.user._json.email)
+            if(req.user._json.email===data.email){
+                req.session.role = 'teacher'
+                return
+            }
         }
 
         console.log(req.session.role)
 
+        // Redirect to the frontend after successful authentication
         res.redirect(process.env.frontend_url);
     }
 );

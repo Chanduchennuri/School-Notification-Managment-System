@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const teacher = mongoose.Schema({
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     fName:{
         type:String,

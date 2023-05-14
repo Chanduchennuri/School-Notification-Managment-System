@@ -3,11 +3,13 @@ const mongoose = require('mongoose')
 const studSchema = new mongoose.Schema({
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     parentEmail:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     fName:{
         type:String,
