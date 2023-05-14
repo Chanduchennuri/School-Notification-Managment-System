@@ -87,10 +87,11 @@ app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: process.env.frontend_url }),
     async (req, res) => {
         let flag = 0
+        let role = ""
         //admin login
         if(req.user._json.email==process.env.adminMail1 || req.user._json.email==process.env.adminMail2)
         {
-            req.session.role = 'admin'
+            role = 'admin'
             flag = 1
         }
         else{
@@ -99,7 +100,7 @@ app.get('/auth/google/callback',
             const {createTeacher , findByEmailT} = require('./controllers/teacher')
             data = await findByEmailT(req.user._json.email)
             if(data && req.user._json.email===data.email){
-                req.session.role = 'teacher'
+                role = 'teacher'
                 flag = 1
             }
             //parent and student login
@@ -107,7 +108,7 @@ app.get('/auth/google/callback',
                 const {findByEmailS} = require('./controllers/student')
                 data1 = await findByEmailS(req.user._json.email)
                 if(data1 && req.user._json.email===data1.email){
-                    req.session.role = 'student'
+                    role = 'student'
                     flag = 1
                 }
             }
@@ -115,7 +116,7 @@ app.get('/auth/google/callback',
                 const {findByEmailP} = require('./controllers/student')
                 data2 = await findByEmailP(req.user._json.email)
                 if(data2 && req.user._json.email===data2.parentEmail){
-                    req.session.role = 'parent'
+                    role = 'parent'
                     flag = 1
                 }
             }
@@ -124,6 +125,10 @@ app.get('/auth/google/callback',
         if(flag===0){
             console.log("user not login")
             req.logout((err) => { console.log(err) });
+        }
+        else{
+            req.session.role = role
+            req.session.email = req.user._json.email
         }
         console.log(req.session.role)
 
@@ -138,11 +143,15 @@ app.get('/auth/user', (req, res) => {
 });
 
 
-app.get('/auth/logout', (req, res) => {
+app.get('/logout', (req, res) => {
     req.logout((err) => { console.log(err) });
     res.json({ logout: "true" });
 });
 
+
+//Other Routes
+const urlRouter = require('./routes/user.js')
+app.use('/user',urlRouter)
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
