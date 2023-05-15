@@ -1,12 +1,18 @@
 const teacher = require('../models/teacher')
 
-async function createTeacher(){
+async function createTeacher(email,fName,lName,phone){
     await teacher.create({
-        email:"fadkeabhi@gmail.com",
-        fName:'ABHI',
-        lName:'Fadake',
-        phone:7083260191
-
+        email:email,
+        fName:fName,
+        lName:lName,
+        phone:phone
+    })
+    .then(()=>{
+        return true
+    })
+    .catch((err) => {
+        console.log(err)
+        return false
     })
 }
 
@@ -16,7 +22,16 @@ async function findByEmailT(email){
         console.log(err)
     })
     return docs
-    
 }
 
-module.exports = {createTeacher , findByEmailT}
+async function getAllT(){
+    const docs = await teacher.find({})
+    .catch((err) => {
+        console.log(err)
+    })
+    return docs
+}
+
+
+
+module.exports = {createTeacher , findByEmailT, getAllT}

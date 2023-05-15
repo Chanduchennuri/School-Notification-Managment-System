@@ -16,18 +16,11 @@ connectToMongoose()
 
 const app = express();
 
-//testing models
+//testing models for syntax errors
 const stud = require('./models/student')
 const clas = require('./models/clas')
 const teacher = require('./models/teacher')
 
-//create a teacher
-// const {createTeacher} = require('./controllers/teacher.js')
-// createTeacher().then(console.log('techer created'))
-
-//create student
-// const {createStudent} = require('./controllers/student')
-// createStudent().then(console.log('student created'))
 
 // Middleware to parse request bodies
 app.use(express.json());
@@ -150,8 +143,11 @@ app.get('/logout', (req, res) => {
 
 
 //Other Routes
-const urlRouter = require('./routes/user.js')
-app.use('/user',urlRouter)
+const userRouter = require('./routes/user.js')
+app.use('/user',userRouter)
+
+const adminRouter = require('./routes/admin.js')
+app.use('/admin',adminRouter)
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
