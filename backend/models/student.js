@@ -31,7 +31,7 @@ const studSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    clas:{
+    class:{
         type:String
     }
     

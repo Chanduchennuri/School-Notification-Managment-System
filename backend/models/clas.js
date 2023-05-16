@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const clas = new mongoose.Schema({
-    clas:{
+    class:{
         type:String,
         required:true,
         unique:true

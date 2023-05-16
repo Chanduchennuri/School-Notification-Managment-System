@@ -1,32 +1,96 @@
 const student = require('../models/student')
 
-async function createStudent(){
-    await student.create({
-        email:"fadkeabhi@gmail.com",
-        parentEmail:"fadkeabhi1@gmail.com",
-        fName:'ABHI',
-        pName:'NAMDEV',
-        lName:'Fadake',
-        sPhone:7083260191,
-        pPhone:1111111111
-
-    })
+async function createStudent(email,
+    parentEmail,
+    fName,
+    pName,
+    lName,
+    sPhone,
+    pPhone) {
+    const { findByEmailT } = require("./teacher")
+    let createdOrNot
+    if (await findByEmailS(email) ||
+        await findByEmailS(parentEmail) ||
+        await findByEmailP(email) ||
+        await findByEmailP(parentEmail) ||
+        await findByEmailT(email) ||
+        await findByEmailT(parentEmail)) {
+        createdOrNot = false
+    }
+    else {
+        await student.create({
+            email: email,
+            parentEmail: parentEmail,
+            fName: fName,
+            pName: pName,
+            lName: lName,
+            sPhone: sPhone,
+            pPhone: pPhone
+        })
+            .then(() => {
+                createdOrNot = true
+            })
+            .catch((err) => {
+                console.log(err)
+                createdOrNot = false
+            })
+    }
+    return createdOrNot
 }
 
-async function findByEmailS(email){
-    const docs = await student.findOne({email:email})
-    .catch((err) => {
-        console.log(err)
-    })
+async function findByEmailS(email) {
+    const docs = await student.findOne({ email: email })
+        .catch((err) => {
+            console.log(err)
+        })
     return docs
 }
 
-async function findByEmailP(email){
-    const docs = await student.findOne({parentEmail:email})
-    .catch((err) => {
-        console.log(err)
-    })
+async function findByEmailP(email) {
+    const docs = await student.findOne({ parentEmail: email })
+        .catch((err) => {
+            console.log(err)
+        })
     return docs
 }
 
-module.exports = {createStudent , findByEmailS, findByEmailP}
+async function getAllSByClas(clas) {
+    const docs = await student.find({ class: clas })
+        .catch((err) => {
+            console.log(err)
+        })
+    return docs
+}
+
+async function getAllS() {
+    const docs = await student.find({})
+        .catch((err) => {
+            console.log(err)
+        })
+    return docs
+}
+
+async function updateClassS(email, clas) {
+    let isSuccess
+    const { checkClasExist } = require('./class')
+    if (await checkClasExist(clas)) {
+        const result = await student.updateOne({ email: email }, { class: clas })
+            .catch((err) => {
+                console.log(err)
+                isSuccess = false
+            })
+
+        if (result) {
+            isSuccess = true
+        }
+        else {
+            isSuccess = false
+        }
+    }
+    else {
+        isSuccess = false
+    }
+    return isSuccess
+}
+
+module.exports = { updateClassS, getAllSByClas, getAllS, createStudent, findByEmailS, findByEmailP }

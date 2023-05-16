@@ -70,10 +70,34 @@ async function pushClas(email,clas){
             }
         }
     })
-    console.log(isSuccess)
+    return isSuccess
+}
+
+
+async function pullClas(email,clas){
+    let isSuccess
+    await teacher.findOne({email:email})
+    .catch((err) => {
+        console.log(err)
+        isSuccess = false
+    })
+    .then((e) => {
+        if(e.class.includes(clas)){
+            e.class.pull(clas)
+            const result = e.save()
+            if(result){
+                isSuccess = true
+            }
+        }
+        else{
+            isSuccess = true
+        }
+    })
     return isSuccess
 }
 
 
 
-module.exports = {pushClas , createTeacher , updateTeacher , findByEmailT, getAllT}
+
+
+module.exports = {pushClas , pullClas , createTeacher , updateTeacher , findByEmailT, getAllT}
