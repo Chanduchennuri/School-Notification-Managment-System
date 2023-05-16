@@ -38,7 +38,9 @@ async function findByEmailT(email){
     .catch((err) => {
         console.log(err)
     })
+
     return docs
+
 }
 
 async function getAllT(){
