@@ -18,7 +18,7 @@ const teacher = mongoose.Schema({
         type:Number,
         required:true
     },
-    class:[{String}]
+    class:[String]
 })
 
 const TEACHER = new mongoose.model('teacher',teacher)
