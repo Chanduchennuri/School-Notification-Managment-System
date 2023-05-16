@@ -38,6 +38,32 @@ async function createStudent(email,
     return createdOrNot
 }
 
+async function updateStudent(email,
+    fName,
+    pName,
+    lName,
+    sPhone,
+    pPhone) {
+
+    let docs
+    await student.updateOne({ email: email },
+        {
+            fName: fName,
+            pName: pName,
+            lName: lName,
+            sPhone: sPhone,
+            pPhone: pPhone
+        })
+        .then((e) => {
+            docs = e
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    return docs
+
+}
+
 async function findByEmailS(email) {
     const docs = await student.findOne({ email: email })
         .catch((err) => {
@@ -79,7 +105,6 @@ async function updateClassS(email, clas) {
                 console.log(err)
                 isSuccess = false
             })
-
         if (result) {
             isSuccess = true
         }
@@ -93,4 +118,4 @@ async function updateClassS(email, clas) {
     return isSuccess
 }
 
-module.exports = { updateClassS, getAllSByClas, getAllS, createStudent, findByEmailS, findByEmailP }
+module.exports = { updateStudent , updateClassS, getAllSByClas, getAllS, createStudent, findByEmailS, findByEmailP }

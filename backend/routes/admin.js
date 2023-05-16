@@ -162,7 +162,7 @@ router.post('/class/create', async (req, res) => {
 router.get('/students/:clas', async (req, res) => {
     if (req.session.role === 'admin' || true) {
         const { getAllSByClas } = require('../controllers/student')
-        res.json(await getAllSByClas(clas))
+        res.json(await getAllSByClas(req.params.clas))
     }
     else {
         res.json({})
@@ -215,6 +215,39 @@ router.post('/student/create', async (req, res) => {
     }
 })
 
+router.post('/student/update', async (req, res) => {
+    if (req.session.role === 'admin' || true) {
+        if (req.body.email &&
+            req.body.fName &&
+            req.body.pName &&
+            req.body.lName &&
+            req.body.sPhone &&
+            req.body.pPhone) {
+            const { updateStudent } = require('../controllers/student')
+            const docs = await updateStudent(req.body.email,
+                req.body.fName,
+                req.body.pName,
+                req.body.lName,
+                req.body.sPhone,
+                req.body.pPhone)
+            if (docs) {
+                res.json({ msg: 'Student Updated Successfully.' })
+            }
+            else {
+                res.json({ msg: 'Student Updated Failed.' })
+            }
+
+        }
+        else {
+            res.json({ msg: 'All Fields Are required' })
+
+        }
+    }
+    else {
+        res.json({ msg: 'Admin access only' })
+    }
+})
+
 
 router.post('/student/class/update', async (req, res) => {
     if (req.session.role === 'admin' || true) {
@@ -240,6 +273,8 @@ router.post('/student/class/update', async (req, res) => {
         res.json({ msg: 'Admin access only' })
     }
 })
+
+
 
 
 
