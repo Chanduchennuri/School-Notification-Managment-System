@@ -6,7 +6,9 @@ async function createTeacher(email,fName,lName,phone){
         email:email,
         fName:fName,
         lName:lName,
-        phone:phone
+        phone:phone,
+        class:[]
+        
     })
     .then(()=>{
         createdOrNot = true

@@ -8,11 +8,12 @@
 The ultimate service for managing multi-channel notifications with a single API.
 </div>
 
-<h3>Your Topic</h3>
+<h3>Building a notification system for schools that delivers updates and 
+reminders to students and parents</h3>
 <p>Description</p>
 
 <h3>Technologies being used</h3>
-<p>NextJS / Python / Laravel / NestJS, anything you can to help us bring the right people to test the project</p>
+<p>Node.js Express.js MongoDB React.js </p>
 
 <h3>App Link</h3>
 <p>If there is</p>

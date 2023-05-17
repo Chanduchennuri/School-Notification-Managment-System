@@ -22,3 +22,11 @@ post /admin/student/class/update parameters- email clas --function updates the c
 get /admin/students - get all students details
 get /admin/students/:clas - get students details if particular class
 post /admin/student/update parameters-email fName lName phone --function updates fname lname and phone --key email
+
+
+---------teacher routes--------------
+post /teacher/feed/create --params title content clas
+
+
+----------student routes-------------
+get /student/feed/:limit

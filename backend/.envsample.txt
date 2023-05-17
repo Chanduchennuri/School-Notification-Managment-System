@@ -4,3 +4,4 @@ DATABASE_URL=mongodb://0.0.0.0:27017/schoolNotification
 frontend_url=http://localhost:3000/
 adminMail1=
 adminMail2=
+NOVU_API_KEY=

@@ -20,7 +20,7 @@ const app = express();
 const stud = require('./models/student')
 const clas = require('./models/clas')
 const teacher = require('./models/teacher')
-
+const feed = require('./models/feed')
 
 // Middleware to parse request bodies
 app.use(express.json());
@@ -111,6 +111,7 @@ app.get('/auth/google/callback',
                 if(data1 && req.user._json.email===data1.email){
                     role = 'student'
                     flag = 1
+                    req.session.clas = data1.class
                 }
             }
             if(flag === 0){
@@ -119,6 +120,7 @@ app.get('/auth/google/callback',
                 if(data2 && req.user._json.email===data2.parentEmail){
                     role = 'parent'
                     flag = 1
+                    req.session.clas = data1.class
                 }
             }
             
@@ -155,6 +157,12 @@ app.use('/user',userRouter)
 
 const adminRouter = require('./routes/admin.js')
 app.use('/admin',adminRouter)
+
+const teacherRouter = require('./routes/teacher.js')
+app.use('/teacher',teacherRouter)
+
+const studentRouter = require('./routes/student')
+app.use('/student' , studentRouter)
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
