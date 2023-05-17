@@ -10,7 +10,6 @@ function App() {
   const [user,setUser] = useState({});
   const getUser = async() => {
     const {data} = await instance.get(getUserRoute);
-    console.log(data);
     setUser(data);
   }
   useEffect(()=>{
