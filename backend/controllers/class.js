@@ -27,6 +27,13 @@ async function createClas(clas) {
                 console.log(err)
                 createdOrNot = false
             })
+
+        //create novu topic if class is created
+        if(createdOrNot){
+            const { createTopic } = require('./novu')
+            createTopic(clas)
+        }
+
         return createdOrNot
     }
 }

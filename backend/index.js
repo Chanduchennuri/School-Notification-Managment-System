@@ -22,6 +22,9 @@ const clas = require('./models/clas')
 const teacher = require('./models/teacher')
 const feed = require('./models/feed')
 
+//testing novu
+const novu = require('./controllers/novu')
+
 // Middleware to parse request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

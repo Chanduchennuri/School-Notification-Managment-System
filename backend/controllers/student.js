@@ -25,7 +25,8 @@ async function createStudent(email,
             pName: pName,
             lName: lName,
             sPhone: sPhone,
-            pPhone: pPhone
+            pPhone: pPhone,
+            class: ''
         })
             .then(() => {
                 createdOrNot = true
@@ -35,6 +36,15 @@ async function createStudent(email,
                 createdOrNot = false
             })
     }
+    // create subscriber in novu if createdOrNot
+    if(createdOrNot){
+        const { createSubscriber} = require('./novu')
+        createSubscriber(email,
+            fName,
+            lName,
+            sPhone)
+    }
+
     return createdOrNot
 }
 
@@ -100,6 +110,10 @@ async function updateClassS(email, clas) {
     let isSuccess
     const { checkClasExist } = require('./class')
     if (await checkClasExist(clas)) {
+        //get old class
+        const old = await findByEmailS(email)
+
+        //update class
         const result = await student.updateOne({ email: email }, { class: clas })
             .catch((err) => {
                 console.log(err)
@@ -115,6 +129,15 @@ async function updateClassS(email, clas) {
     else {
         isSuccess = false
     }
+
+    //remove student from old topic
+    //add student to topic if isSuccess
+    if(isSuccess){
+        const {addToTopic, removeFromTopic} = require('./novu')
+        removeFromTopic(email,old.class)
+        addToTopic(email,old.class)
+    }
+
     return isSuccess
 }
 
