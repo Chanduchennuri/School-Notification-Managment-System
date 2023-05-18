@@ -11,7 +11,9 @@ router.get('/teachers', async (req, res) => {
     else {
         res.json({})
     }
-})
+});
+
+router.get('/teacher/')
 
 router.post('/teacher/create', async (req, res) => {
     if (req.session.role === 'admin' || true) {
