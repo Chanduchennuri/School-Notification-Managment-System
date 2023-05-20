@@ -9,6 +9,7 @@ function StudentComponent(props) {
     const [checked, setChecked] = useState(false);
     const [email, setEmail] = useState('');
     const [clas, setClas] = useState('');
+    const [studentClass, setStudentClass] = useState('');
 
     useEffect(() => {
         if (props.data.class === props.clas) {
@@ -16,6 +17,7 @@ function StudentComponent(props) {
         }
         setEmail(props.data.email)
         setClas(props.clas)
+        setStudentClass(props.data.class)
     }, [props])
 
     const handleChange = async () => {
@@ -27,6 +29,7 @@ function StudentComponent(props) {
             })
                 .then((e) => {
                     setChecked(!checked);
+                    setStudentClass(clas)
                 })
         }
         else {
@@ -35,6 +38,7 @@ function StudentComponent(props) {
             })
                 .then((e) => {
                     setChecked(!checked);
+                    setStudentClass("")
                 })
         }
     }
@@ -53,7 +57,7 @@ function StudentComponent(props) {
                         {props.data.fName} {props.data.lName}
                     </p>
                     <p>
-                        Class : {props.data.class}
+                        Class : {studentClass}
                     </p>
                 </label>
             </div>
