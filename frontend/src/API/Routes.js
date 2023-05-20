@@ -13,3 +13,5 @@ export const updateStudentRoute = `${server}/admin/student/update`;
 
 export const getClassRoute = `${server}/admin/class`;
 export const createClassRoute = `${server}/admin/class/create`;
+export const linkTeacherClassRoute = `${server}/admin/teacher/class/add`;
+export const unlinkTeacherClassRoute = `${server}/admin/teacher/class/remove`;

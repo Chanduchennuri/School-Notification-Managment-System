@@ -16,6 +16,7 @@ import EditStudent from './pages/Admin/EditStudent';
 
 import Clas from './pages/Admin/Clas';
 import AddClass from './pages/Admin/AddClass';
+import EditClass from './pages/Admin/EditClass';
 
 function App() {
   const [user,setUser] = useState({});
@@ -63,6 +64,9 @@ function App() {
       </Routes>
       <Routes>
         <Route exact path={`/admin/class/add`} element={<AddClass />}></Route>
+      </Routes>
+      <Routes>
+        <Route exact path={`/admin/class/edit`} element={<EditClass />}></Route>
       </Routes>
 
     </div>

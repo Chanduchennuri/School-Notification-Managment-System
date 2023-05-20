@@ -2,6 +2,16 @@
 const express = require('express')
 const router = express.Router()
 
+router.get('/teachers/:clas', async (req, res) => {
+    if (req.session.role === 'admin') {
+        const { getAllTByClas } = require('../controllers/teacher')
+        res.json(await getAllTByClas(req.params.clas))
+    }
+    else {
+        res.json({})
+    }
+})
+
 
 router.get('/teachers', async (req, res) => {
     if (req.session.role === 'admin') {
