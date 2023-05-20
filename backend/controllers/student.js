@@ -108,10 +108,11 @@ async function getAllS() {
 
 async function updateClassS(email, clas) {
     let isSuccess
+    let old
     const { checkClasExist } = require('./class')
     if (await checkClasExist(clas)) {
         //get old class
-        const old = await findByEmailS(email)
+        old = await findByEmailS(email)
 
         //update class
         const result = await student.updateOne({ email: email }, { class: clas })
@@ -135,7 +136,7 @@ async function updateClassS(email, clas) {
     if(isSuccess){
         const {addToTopic, removeFromTopic} = require('./novu')
         removeFromTopic(email,old.class)
-        addToTopic(email,old.class)
+        addToTopic(email,clas)
     }
 
     return isSuccess

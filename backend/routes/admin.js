@@ -13,10 +13,10 @@ router.get('/teachers', async (req, res) => {
     }
 });
 
-router.get('/teacher/')
+
 
 router.post('/teacher/create', async (req, res) => {
-    if (req.session.role === 'admin' || true) {
+    if (req.session.role === 'admin') {
         if (req.body.email &&
             req.body.fName &&
             req.body.lName &&
@@ -157,6 +157,16 @@ router.post('/class/create', async (req, res) => {
         res.json({ msg: 'Admin access only' })
     }
 })
+
+router.get('/class', async (req, res) => {
+    if (req.session.role === 'admin') {
+        const { getAllC } = require('../controllers/class')
+        res.json(await getAllC())
+    }
+    else {
+        res.json({})
+    }
+});
 
 
 //routes for /student

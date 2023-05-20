@@ -33,10 +33,19 @@ async function createClas(clas) {
             const { createTopic } = require('./novu')
             createTopic(clas)
         }
-
         return createdOrNot
     }
 }
 
 
-module.exports = { createClas,checkClasExist }
+async function getAllC(){
+    const docs = await clasM.find({})
+    .catch((err) => {
+        console.log(err)
+    })
+    console.log(docs)
+    return docs
+}
+
+
+module.exports = { createClas,checkClasExist,getAllC }

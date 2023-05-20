@@ -15,6 +15,7 @@ POST admin/teacher/class/remove parameters- email clas --function removes the cl
 
 
 POST admin/class/create - create a class --parameter clas
+GET admin/class --gets all class
 
 
 post /admin/student/create parameters-email fName lName phone
