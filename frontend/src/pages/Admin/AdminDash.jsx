@@ -1,8 +1,14 @@
 import React from 'react'
 import Layout from './components/Layout';
+import { useNavigate } from 'react-router-dom';
 
 function AdminDash({user}) {
   console.log(user)
+  const navigate = useNavigate()
+  if(user.role != "admin"){
+    navigate('/')
+    console.log("hi")
+  }
   return (
     <Layout>
       <div className='bg-white items-center justify-center m-8 mb-0 flex rounded-lg'>
