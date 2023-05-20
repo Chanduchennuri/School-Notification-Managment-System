@@ -15,6 +15,7 @@ import AddStudent from './pages/Admin/AddStudent';
 import EditStudent from './pages/Admin/EditStudent';
 
 import Clas from './pages/Admin/Clas';
+import AddClass from './pages/Admin/AddClass';
 
 function App() {
   const [user,setUser] = useState({});
@@ -59,6 +60,9 @@ function App() {
 
       <Routes>
         <Route exact path={`/admin/class`} element={<Clas />}></Route>
+      </Routes>
+      <Routes>
+        <Route exact path={`/admin/class/add`} element={<AddClass />}></Route>
       </Routes>
 
     </div>

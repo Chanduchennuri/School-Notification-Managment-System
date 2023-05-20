@@ -43,7 +43,6 @@ async function getAllC(){
     .catch((err) => {
         console.log(err)
     })
-    console.log(docs)
     return docs
 }
 

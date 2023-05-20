@@ -3,6 +3,7 @@ const { Novu } = require("@novu/node");
 const novu = new Novu(process.env.NOVU_API_KEY);
 
 async function createTopic(name) {
+    name = name.replace(/\s+/g, '-');
     name = process.env.random + name
     const result = await novu.topics.create({
         key: name,
@@ -19,6 +20,7 @@ async function createTopic(name) {
 }
 
 async function removeFromTopic(email, name) {
+    name = name.replace(/\s+/g, '-');
     name = process.env.random + name
     const result = await novu.topics.removeSubscribers(name, {
         subscribers: [email],
@@ -33,6 +35,7 @@ async function removeFromTopic(email, name) {
 }
 
 async function addToTopic(email, name) {
+    name = name.replace(/\s+/g, '-');
     name = process.env.random + name
     const result = await novu.topics.addSubscribers(name, {
         subscribers: [email],
