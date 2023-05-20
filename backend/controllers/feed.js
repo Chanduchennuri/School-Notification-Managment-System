@@ -28,6 +28,15 @@ async function createFeed(email,
         //teacher dont have access to class
         isSuccess = false
     }
+    if(isSuccess){
+        //send notification
+        let fullName = docs.fName + ' ' + docs.lName
+        const {sendNotificationToTopic} = require('./novu')
+        sendNotificationToTopic(clas,
+            title,
+            content,
+            fullName)
+    }
     return isSuccess
 }
 

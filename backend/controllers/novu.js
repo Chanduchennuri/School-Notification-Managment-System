@@ -61,12 +61,36 @@ async function createSubscriber(email,
         lastName: lastName,
         phone: phone,
     })
-    .catch((err) => {
-        console.log(err)
-        return false
-    })
+        .catch((err) => {
+            console.log(err)
+            return false
+        })
 }
-// createSubscriber('emsil@gmail.com','fname','lname','1234567890')
+
+async function sendNotificationToTopic(clas,
+    title,
+    content,
+    createdBy
+) {
+    clas = clas.replace(/\s+/g, '-');
+    clas = process.env.random + clas
+    await novu.trigger('notification', {
+        to: [{ type: 'Topic', topicKey: clas }],
+        payload: {
+            subject: title,
+            content: content,
+            createdBy:createdBy
+        },
+    })
+        .catch((err) => {
+            console.log(err)
+            return false
+        })
+        .then((e) => {
+            console.log("Sent Notification")
+            console.log(e)
+        })
+}
 
 
-module.exports = { createTopic, removeFromTopic, addToTopic,createSubscriber }
+module.exports = { sendNotificationToTopic, createTopic, removeFromTopic, addToTopic, createSubscriber }

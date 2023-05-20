@@ -136,11 +136,15 @@ app.get('/auth/google/callback',
             req.session.role = role
             req.session.email = req.user._json.email
         }
+        console.log(role)
         if(role === 'admin'){
             res.redirect(process.env.frontend_url_admin);
         }else if(role === 'student' || role === 'parent'){
             res.redirect(process.env.frontend_url);
+        }else if(role === 'teacher'){
+            res.redirect(process.env.frontend_url);
         }
+
         // Redirect to the frontend after successful authentication
         
     }

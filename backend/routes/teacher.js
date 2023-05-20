@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 router.post('/feed/create', async (req, res) => {
-    if (req.session.role === 'teacher' && true) {
+    if (req.session.role === 'teacher') {
         if (req.body.title &&
             req.body.content &&
             req.body.clas) {
