@@ -37,8 +37,8 @@ async function createStudent(email,
             })
     }
     // create subscriber in novu if createdOrNot
-    if(createdOrNot){
-        const { createSubscriber} = require('./novu')
+    if (createdOrNot) {
+        const { createSubscriber } = require('./novu')
         createSubscriber(email,
             fName,
             lName,
@@ -133,13 +133,45 @@ async function updateClassS(email, clas) {
 
     //remove student from old topic
     //add student to topic if isSuccess
-    if(isSuccess){
-        const {addToTopic, removeFromTopic} = require('./novu')
-        removeFromTopic(email,old.class)
-        addToTopic(email,clas)
+    if (isSuccess) {
+        const { addToTopic, removeFromTopic } = require('./novu')
+        if (old) {
+            await removeFromTopic(email, old.class)
+            console.log("old found")
+        }
+        await addToTopic(email, clas)
     }
 
     return isSuccess
 }
 
-module.exports = { updateStudent , updateClassS, getAllSByClas, getAllS, createStudent, findByEmailS, findByEmailP }
+
+async function removeClassS(email) {
+    let isSuccess
+    let old
+    const { checkClasExist } = require('./class')
+    //get old class
+    old = await findByEmailS(email)
+    const result = await student.updateOne({ email: email }, { class: '' })
+        .catch((err) => {
+            console.log(err)
+            isSuccess = false
+        })
+    if (result) {
+        isSuccess = true
+    }
+    else {
+        isSuccess = false
+    }
+
+
+    //remove student from old topic
+    if (isSuccess) {
+        const { removeFromTopic } = require('./novu')
+        await removeFromTopic(email, old.class)
+    }
+
+    return isSuccess
+}
+
+module.exports = { updateStudent, removeClassS, updateClassS, getAllSByClas, getAllS, createStudent, findByEmailS, findByEmailP }

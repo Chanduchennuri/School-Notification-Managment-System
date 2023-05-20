@@ -10,6 +10,8 @@ export const updateTeacherRoute = `${server}/admin/teacher/update`;
 export const getStudentRoute = `${server}/admin/students`;
 export const createStudentRoute = `${server}/admin/student/create`;
 export const updateStudentRoute = `${server}/admin/student/update`;
+export const updateStudentClassRoute = `${server}/admin/student/class/update`;
+export const removeStudentClassRoute = `${server}/admin/student/class/remove`;
 
 export const getClassRoute = `${server}/admin/class`;
 export const createClassRoute = `${server}/admin/class/create`;

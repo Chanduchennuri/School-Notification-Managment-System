@@ -20,6 +20,8 @@ GET admin/class --gets all class
 
 post /admin/student/create parameters-email fName lName phone
 post /admin/student/class/update parameters- email clas --function updates the class of a student
+post /admin/student/class/remove parameters- email clas --function removes the class of a student
+
 get /admin/students - get all students details
 get /admin/students/:clas - get students details if particular class
 post /admin/student/update parameters-email fName lName phone --function updates fname lname and phone --key email

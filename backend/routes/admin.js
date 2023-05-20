@@ -12,7 +12,6 @@ router.get('/teachers/:clas', async (req, res) => {
     }
 })
 
-
 router.get('/teachers', async (req, res) => {
     if (req.session.role === 'admin') {
         const { getAllT } = require('../controllers/teacher')
@@ -22,8 +21,6 @@ router.get('/teachers', async (req, res) => {
         res.json({})
     }
 });
-
-
 
 router.post('/teacher/create', async (req, res) => {
     if (req.session.role === 'admin') {
@@ -289,6 +286,26 @@ router.post('/student/class/update', async (req, res) => {
         else {
             res.json({ msg: 'All Fields Are required' })
 
+        }
+    }
+    else {
+        res.json({ msg: 'Admin access only' })
+    }
+})
+router.post('/student/class/remove', async (req, res) => {
+    if (req.session.role === 'admin') {
+        if (req.body.email) {
+            const { removeClassS } = require('../controllers/student')
+            const createdOrNot = await removeClassS(req.body.email)
+            if (createdOrNot === true) {
+                res.json({ msg: 'Class removed Successfully.' })
+            }
+            else {
+                res.json({ msg: 'Class removed Failed.' })
+            }
+        }
+        else {
+            res.json({ msg: 'All Fields Are required' })
         }
     }
     else {

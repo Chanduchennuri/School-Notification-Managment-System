@@ -35,6 +35,7 @@ async function removeFromTopic(email, name) {
 }
 
 async function addToTopic(email, name) {
+    console.log(email + name)
     name = name.replace(/\s+/g, '-');
     name = process.env.random + name
     const result = await novu.topics.addSubscribers(name, {
