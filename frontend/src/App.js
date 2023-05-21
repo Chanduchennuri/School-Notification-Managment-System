@@ -33,13 +33,13 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route exact path='/' element={<Home/>}></Route>
-        <Route exact path='/admin' element={<AdminDash user={user} />}></Route>
-        <Route exact path='/admin/teacher' element={<Teacher />}></Route>
-        <Route exact path='/admin/teacher/add' element={<AddTeacher />} ></Route>
+        <Route exact path={'/'} element={<Home/>}></Route>
+        <Route exact path={'/admin'} element={<AdminDash user={user} />}></Route>
+        <Route exact path={'/admin/teacher'} element={<Teacher />}></Route>
+        <Route exact path={'/admin/teacher/add'} element={<AddTeacher />} ></Route>
         <Route exact path={`/admin/teacher/edit`} element={<EditTeacher />}></Route>
         <Route exact path={`/admin/student`} element={<Student />}></Route>
-        <Route exact path='/admin/student/add' element={<AddStudent />} ></Route>
+        <Route exact path={'/admin/student/add'} element={<AddStudent />} ></Route>
         <Route exact path={`/admin/student/edit`} element={<EditStudent />}></Route>
         <Route exact path={`/admin/class`} element={<Clas />}></Route>
         <Route exact path={`/admin/class/add`} element={<AddClass />}></Route>
