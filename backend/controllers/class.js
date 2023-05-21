@@ -3,7 +3,7 @@ const clasM = require('../models/clas')
 async function checkClasExist(clas) {
     const docs = await clasM.findOne({ class: clas })
     if (docs) {
-        return true
+        return docs;
     }
     else {
         return false

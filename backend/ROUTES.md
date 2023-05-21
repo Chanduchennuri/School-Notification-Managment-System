@@ -29,7 +29,7 @@ post /admin/student/update parameters-email fName lName phone --function updates
 
 ---------teacher routes--------------
 post /teacher/feed/create --params title content clas
-
+GET  /teacher/feed/get 
 
 ----------student routes-------------
 get /student/feed/:limit

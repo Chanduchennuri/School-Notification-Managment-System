@@ -140,6 +140,8 @@ app.get('/auth/google/callback',
             res.redirect(process.env.frontend_url_admin);
         }else if(role === 'student' || role === 'parent'){
             res.redirect(process.env.frontend_url);
+        }else if(role === 'teacher'){
+            res.redirect(process.env.frontend_url_teach);
         }
         // Redirect to the frontend after successful authentication
         

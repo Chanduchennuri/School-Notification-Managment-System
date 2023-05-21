@@ -17,3 +17,6 @@ export const getClassRoute = `${server}/admin/class`;
 export const createClassRoute = `${server}/admin/class/create`;
 export const linkTeacherClassRoute = `${server}/admin/teacher/class/add`;
 export const unlinkTeacherClassRoute = `${server}/admin/teacher/class/remove`;
+
+export const createPostRoute = `${server}/teacher/feed/create`;
+export const GetPostRoute = `${server}/teacher/feed/get`;

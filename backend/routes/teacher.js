@@ -27,5 +27,12 @@ router.post('/feed/create', async (req, res) => {
     }
 })
 
+router.get('/feed/get', async (req,res) => {
+    if (req.session.role === 'teacher') {
+        const { getFeedByEmail } = require('../controllers/feed')
+        res.json( await getFeedByEmail(req.session.email));
+    }
+})
+
 
 module.exports = router

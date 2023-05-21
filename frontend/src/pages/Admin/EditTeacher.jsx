@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import Layout from './components/Layout';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import instance from '../../util/instance';
-import {  getTeacherRoute, updateTeacherRoute } from '../../API/Routes';
+import {  getClassRoute, getTeacherRoute, updateTeacherRoute } from '../../API/Routes';
 
 function EditTeacher() {
     const [email, setEmail] = useState("");
     const [fName, setfName] = useState("");
     const [lName, setlName] = useState("");
     const [phone, setPhone] = useState("");
+    const [ClassData, setClass] = useState([]);
+    const [selectedClass,setSelectedClass] = useState("");
     const [searchParams,setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const id = searchParams.get('id');
@@ -19,19 +21,30 @@ function EditTeacher() {
     }
     const FormSubmitHandler = (e) =>{
         e.preventDefault();
+        const Sclass = [];
+        Sclass.push(selectedClass);
+        console.log(selectedClass);
         const {data} = instance.post(updateTeacherRoute,{
-            email,lName,fName,phone
+            email,lName,fName,phone,class:Sclass
         });
+        console.log(data)
         navigate('/admin/teacher');
     }
     useEffect(()=>{
+        instance.get(getClassRoute).
+        then((result)=>{
+          console.log(result);
+          setClass(result.data);
+        })
         getData().then((result)=>{
+            console.log(result);
             setEmail(result.email)
             setfName(result.fName);
             setlName(result.lName);
             setPhone(result.phone);
+            setSelectedClass(result.class[0]);
         });
-    },[id])
+    },[])
   return (
     <Layout>
       <div className="flex-1 w-full flex items-center justify-center rounded-lg">
@@ -81,6 +94,19 @@ function EditTeacher() {
               placeholder="Enter Email"
               className="outline-none w-[400px] rounded-md placeholder:text-gray-300 p-2 bg-[#9BA4B5]"
             />
+          </div>
+          <div className="flex flex-col mx-4">
+            <label>
+              Class<span className="text-red-800">*</span>
+            </label>
+            <select value={selectedClass} onChange={(e)=>setSelectedClass(e.target.value)} className="outline-none w-[400px] rounded-md placeholder:text-gray-300 p-2 bg-[#9BA4B5]">
+              <option value={0}>Select Class</option>
+              {
+                ClassData.map((clas)=>(
+                  <option value={clas} key={clas._id}>{clas.class}</option>
+                ))
+              }
+            </select>
           </div>
           <div className="flex gap-4 p-5">
             <button

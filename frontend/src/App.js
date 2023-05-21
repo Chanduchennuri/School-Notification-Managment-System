@@ -17,6 +17,8 @@ import EditStudent from './pages/Admin/EditStudent';
 import Clas from './pages/Admin/Clas';
 import AddClass from './pages/Admin/AddClass';
 import EditClass from './pages/Admin/EditClass';
+import TeacherDash from './pages/TeacherDash';
+import Post from './pages/Teacher/Post';
 
 function App() {
   const [user,setUser] = useState({});
@@ -69,6 +71,12 @@ function App() {
         <Route exact path={`/admin/class/edit`} element={<EditClass />}></Route>
       </Routes>
 
+      <Routes>
+        <Route exact path='/teacher' element={user ? <TeacherDash user={user} /> : <Navigate to={'/'} />}></Route>
+      </Routes>
+      <Routes>
+        <Route exact path='/teacher/createpost' element={user ? <Post user={user} /> : <Navigate to={'/'} />}></Route>
+      </Routes>
     </div>
   );
 }

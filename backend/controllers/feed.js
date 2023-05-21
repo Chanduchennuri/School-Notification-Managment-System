@@ -31,6 +31,14 @@ async function createFeed(email,
     return isSuccess
 }
 
+async function getFeedByEmail(email){
+    const docs = await feed.find({ createdBy : email })
+    .catch((err)=>{
+        console.log(err);
+    })
+    return docs;
+}
+
 async function getFeedByClass(clas) {
     const docs = await feed.find({ class: clas })
         .sort({ 'updatedAt': -1 })
@@ -50,4 +58,4 @@ async function getFeedByClassWithLimit(clas,limit) {
     return docs
 }
 
-module.exports = { createFeed, getFeedByClass, getFeedByClassWithLimit }
+module.exports = { createFeed, getFeedByEmail, getFeedByClass, getFeedByClassWithLimit }
