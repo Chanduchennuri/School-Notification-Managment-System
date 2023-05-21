@@ -39,10 +39,16 @@ async function createStudent(email,
     // create subscriber in novu if createdOrNot
     if (createdOrNot) {
         const { createSubscriber } = require('./novu')
+        //create student
         createSubscriber(email,
             fName,
             lName,
             sPhone)
+        //create parent
+        createSubscriber(parentEmail,
+            pName,
+            lName,
+            pPhone)
     }
 
     return createdOrNot
@@ -135,11 +141,17 @@ async function updateClassS(email, clas) {
     //add student to topic if isSuccess
     if (isSuccess) {
         const { addToTopic, removeFromTopic } = require('./novu')
+        let tmp = 'parent_' + clas
+        //student
         if (old) {
             await removeFromTopic(email, old.class)
+            await removeFromTopic(old.parentEmail, tmp)
             console.log("old found")
         }
         await addToTopic(email, clas)
+        await addToTopic(old.parentEmail, tmp)
+
+        //parent
     }
 
     return isSuccess
@@ -169,6 +181,8 @@ async function removeClassS(email) {
     if (isSuccess) {
         const { removeFromTopic } = require('./novu')
         await removeFromTopic(email, old.class)
+        let tmp = 'parent_' + old.class
+        await removeFromTopic(old.parentEmail, tmp)
     }
 
     return isSuccess

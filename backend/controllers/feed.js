@@ -32,7 +32,14 @@ async function createFeed(email,
         //send notification
         let fullName = docs.fName + ' ' + docs.lName
         const {sendNotificationToTopic} = require('./novu')
+        //send to student
         sendNotificationToTopic(clas,
+            title,
+            content,
+            fullName)
+        //send to parent
+        let tmp = 'parent_' + clas
+        sendNotificationToTopic(tmp,
             title,
             content,
             fullName)
