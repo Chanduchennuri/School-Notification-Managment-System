@@ -7,7 +7,6 @@ function AdminDash({user}) {
   const navigate = useNavigate()
   if(user.role != "admin"){
     navigate('/')
-    console.log("hi")
   }
   return (
     <Layout>

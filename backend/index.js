@@ -123,7 +123,7 @@ app.get('/auth/google/callback',
                 if(data2 && req.user._json.email===data2.parentEmail){
                     role = 'parent'
                     flag = 1
-                    req.session.clas = data1.class
+                    req.session.clas = data2.class
                 }
             }
             
@@ -140,7 +140,7 @@ app.get('/auth/google/callback',
         if(role === 'admin'){
             res.redirect(process.env.frontend_url_admin);
         }else if(role === 'student' || role === 'parent'){
-            res.redirect(process.env.frontend_url);
+            res.redirect(process.env.student_url);
         }else if(role === 'teacher'){
             res.redirect(process.env.frontend_url);
         }

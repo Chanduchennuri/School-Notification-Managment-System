@@ -88,7 +88,6 @@ async function sendNotificationToTopic(clas,
         })
         .then((e) => {
             console.log("Sent Notification")
-            console.log(e)
         })
 }
 

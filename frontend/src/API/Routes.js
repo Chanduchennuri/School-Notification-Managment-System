@@ -17,3 +17,7 @@ export const getClassRoute = `${server}/admin/class`;
 export const createClassRoute = `${server}/admin/class/create`;
 export const linkTeacherClassRoute = `${server}/admin/teacher/class/add`;
 export const unlinkTeacherClassRoute = `${server}/admin/teacher/class/remove`;
+
+
+export const getFeedStudentRoute = `${server}/student/feed/0`;
+export const getStudentKeyRoute = `${server}/student/novu/key`;
