@@ -20,6 +20,9 @@ import EditClass from './pages/Admin/EditClass';
 import TeacherDash from './pages/TeacherDash';
 import Post from './pages/Teacher/Post';
 
+import StudentDash from './pages/Student/StudentDash'
+import Feed from './pages/Student/Feed'
+
 function App() {
   const [user,setUser] = useState({});
   const getUser = async() => {
@@ -28,47 +31,22 @@ function App() {
   }
   useEffect(()=>{
     getUser();
-  },[])
+  },[user])
   return (
     <div>
       <Routes>
-        <Route exact path='/' element={<Home />}></Route>
-      </Routes>
-      <Routes>
-        <Route exact path='/dash' element={user ? <Dash user={user} /> : <Navigate to={'/'} />}></Route>
-      </Routes>
-      <Routes>
-        <Route exact path='/admin' element={user ? <AdminDash user={user} /> : <Navigate to={'/'} />}></Route>
-      </Routes>
-      <Routes>
-        <Route exact path='/admin/teacher' element={<Teacher />}></Route>
-      </Routes>
-      <Routes>
-        <Route exact path='/admin/teacher/add' element={<AddTeacher />} ></Route>
-      </Routes>
-      <Routes>
+        <Route exact path={'/'} element={<Home/>}></Route>
+        <Route exact path={'/admin'} element={<AdminDash user={user} />}></Route>
+        <Route exact path={'/admin/teacher'} element={<Teacher />}></Route>
+        <Route exact path={'/admin/teacher/add'} element={<AddTeacher />} ></Route>
         <Route exact path={`/admin/teacher/edit`} element={<EditTeacher />}></Route>
-      </Routes>
-      
-
-      <Routes>
         <Route exact path={`/admin/student`} element={<Student />}></Route>
-      </Routes>
-      <Routes>
-        <Route exact path='/admin/student/add' element={<AddStudent />} ></Route>
-      </Routes>
-      <Routes>
+        <Route exact path={'/admin/student/add'} element={<AddStudent />} ></Route>
         <Route exact path={`/admin/student/edit`} element={<EditStudent />}></Route>
-      </Routes>
-
-      <Routes>
         <Route exact path={`/admin/class`} element={<Clas />}></Route>
-      </Routes>
-      <Routes>
         <Route exact path={`/admin/class/add`} element={<AddClass />}></Route>
-      </Routes>
-      <Routes>
         <Route exact path={`/admin/class/edit`} element={<EditClass />}></Route>
+        <Route exact path={`/dash`} element={<Feed user={user}/>}></Route>
       </Routes>
 
       <Routes>

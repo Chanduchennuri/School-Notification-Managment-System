@@ -20,3 +20,6 @@ export const unlinkTeacherClassRoute = `${server}/admin/teacher/class/remove`;
 
 export const createPostRoute = `${server}/teacher/feed/create`;
 export const GetPostRoute = `${server}/teacher/feed/get`;
+
+export const getFeedStudentRoute = `${server}/student/feed/0`;
+export const getStudentKeyRoute = `${server}/student/novu/key`;

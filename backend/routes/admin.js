@@ -52,7 +52,7 @@ router.post('/teacher/create', async (req, res) => {
 })
 
 router.post('/teacher/update', async (req, res) => {
-    if (req.session.role === 'admin' || true) {
+    if (req.session.role === 'admin') {
         if (req.body.email &&
             req.body.fName &&
             req.body.lName &&
@@ -81,7 +81,7 @@ router.post('/teacher/update', async (req, res) => {
 })
 
 router.post('/teacher/class/add', async (req, res) => {
-    if (req.session.role === 'admin' || true) {
+    if (req.session.role === 'admin') {
         if (req.body.email &&
             req.body.clas) {
             const { checkClasExist } = require('../controllers/class')
@@ -112,7 +112,7 @@ router.post('/teacher/class/add', async (req, res) => {
 })
 
 router.post('/teacher/class/remove', async (req, res) => {
-    if (req.session.role === 'admin' || true) {
+    if (req.session.role === 'admin') {
         if (req.body.email &&
             req.body.clas) {
             const { checkClasExist } = require('../controllers/class')
@@ -143,7 +143,7 @@ router.post('/teacher/class/remove', async (req, res) => {
 })
 
 router.post('/class/create', async (req, res) => {
-    if (req.session.role === 'admin' || true) {
+    if (req.session.role === 'admin') {
         if (req.body.clas) {
             const { createClas } = require('../controllers/class')
             const createdOrNot = await createClas(req.body.clas)
@@ -179,7 +179,7 @@ router.get('/class', async (req, res) => {
 //routes for /student
 
 router.get('/students/:clas', async (req, res) => {
-    if (req.session.role === 'admin' || true) {
+    if (req.session.role === 'admin') {
         const { getAllSByClas } = require('../controllers/student')
         res.json(await getAllSByClas(req.params.clas))
     }
@@ -190,7 +190,7 @@ router.get('/students/:clas', async (req, res) => {
 
 
 router.get('/students/', async (req, res) => {
-    if (req.session.role === 'admin' || true) {
+    if (req.session.role === 'admin') {
         const { getAllS } = require('../controllers/student')
         res.json(await getAllS())
     }
@@ -200,7 +200,7 @@ router.get('/students/', async (req, res) => {
 })
 
 router.post('/student/create', async (req, res) => {
-    if (req.session.role === 'admin' || true) {
+    if (req.session.role === 'admin') {
         if (req.body.email &&
             req.body.parentEmail &&
             req.body.fName &&
@@ -235,7 +235,7 @@ router.post('/student/create', async (req, res) => {
 })
 
 router.post('/student/update', async (req, res) => {
-    if (req.session.role === 'admin' || true) {
+    if (req.session.role === 'admin') {
         if (req.body.email &&
             req.body.fName &&
             req.body.pName &&
@@ -269,7 +269,7 @@ router.post('/student/update', async (req, res) => {
 
 
 router.post('/student/class/update', async (req, res) => {
-    if (req.session.role === 'admin' || true) {
+    if (req.session.role === 'admin') {
         if (req.body.email &&
             req.body.clas) {
             const { updateClassS } = require('../controllers/student')
