@@ -42,6 +42,7 @@ async function createFeed(email,
 
 async function getFeedByEmail(email){
     const docs = await feed.find({ createdBy : email })
+    .sort({ 'updatedAt': -1 })
     .catch((err)=>{
         console.log(err);
     })

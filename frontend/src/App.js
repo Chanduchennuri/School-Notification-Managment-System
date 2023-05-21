@@ -47,13 +47,7 @@ function App() {
         <Route exact path={`/admin/class/add`} element={<AddClass />}></Route>
         <Route exact path={`/admin/class/edit`} element={<EditClass />}></Route>
         <Route exact path={`/dash`} element={<Feed user={user}/>}></Route>
-      </Routes>
-
-      <Routes>
-        <Route exact path='/teacher' element={user ? <TeacherDash user={user} /> : <Navigate to={'/'} />}></Route>
-      </Routes>
-      <Routes>
-        <Route exact path='/teacher/createpost' element={user ? <Post user={user} /> : <Navigate to={'/'} />}></Route>
+        <Route exact path='/teacher' element={user ? <TeacherDash user={user} /> : <Navigate to={'/'} />}></Route>        <Route exact path='/teacher/createpost' element={user ? <Post user={user} /> : <Navigate to={'/'} />}></Route>
       </Routes>
     </div>
   );

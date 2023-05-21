@@ -142,8 +142,6 @@ app.get('/auth/google/callback',
         }else if(role === 'student' || role === 'parent'){
             res.redirect(process.env.student_url);
         }else if(role === 'teacher'){
-            res.redirect(process.env.frontend_url);
-        }else if(role === 'teacher'){
             res.redirect(process.env.frontend_url_teach);
         }
 

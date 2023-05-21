@@ -3,7 +3,7 @@ import Layout from './components/Layout';
 import { useNavigate } from 'react-router';
 import instance from '../../util/instance';
 import { getFeedStudentRoute } from '../../API/Routes';
-import TimeAgo from 'react-timeago'
+import {format} from "timeago.js";
 
 
 function FeedElement(props) {
@@ -12,7 +12,7 @@ function FeedElement(props) {
             <div className='flex-1 text-white text-lg flex flex-col p-4 rounded-md'>
                 <p className='font-bold text-[#394867] text-center flex-1 flex flex-col bg-white m-2 rounded-lg'>{props.feed.title}</p>
                 <p>{props.feed.content}</p>
-                <TimeAgo date={props.feed.createdAt}  />
+                {format(props.feed.createdAt)}
             </div>
         </div>
     )
