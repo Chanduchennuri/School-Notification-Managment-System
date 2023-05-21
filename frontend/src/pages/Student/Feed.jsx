@@ -36,6 +36,7 @@ function Feed(props) {
                 <p className='p-4 text-3xl font-semibold'>{props?.user?.role==='student' ? 'STUDENT DASHBOARD' : 'PARENT DASHBOARD'} </p>
             </div>
             <div className='bg-white items-center justify-center m-8 mb-0 flex rounded-lg'>
+                <img src={props?.user?.google?._json.picture} className='w-8 h-8 rounded-full' />
                 <p className='p-4 text-2xl font-semibold'>{props?.user?.role==='student' ? props?.user?.email : props?.user?.parentEmail} </p>
             </div>
             <div className='flex-1 flex flex-col bg-white m-8 rounded-lg'>
