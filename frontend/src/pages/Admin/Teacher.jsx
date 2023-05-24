@@ -17,7 +17,7 @@ function Teacher() {
     },[]);
   return (
     <Layout>
-        <div className='flex-1 flex flex-col bg-white m-8 rounded-lg'>
+        <div className='flex-1 flex flex-col bg-white m-8 rounded-lg overflow-hidden'>
             <div className='flex p-5 w-full items-center justify-center text-lg font-medium gap-4'>
                 <button onClick={()=>{navigate('/admin/teacher/add')}} className='flex px-3 py-2 rounded-lg bg-[#9BA4B5] gap-5'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
@@ -26,8 +26,8 @@ function Teacher() {
                     <p>Add</p>
                 </button>
             </div>
-            <div className='flex-1'>
-                <div className='grid text-white p-3 md:grid-cols-3 xl:grid-cols-4 gap-4 overflow-x-hidden overflow-y-auto'>
+            <div className='flex-1 overflow-x-hidden overflow-y-auto'>
+                <div className='grid text-white md:grid-cols-3 xl:grid-cols-4 p-3 grid-cols-1 gap-4 overflow-x-hidden overflow-y-auto'>
                 {
                     teachersDetails.map((teacher)=>(
                         <div className='flex bg-[#394867] rounded-md'>

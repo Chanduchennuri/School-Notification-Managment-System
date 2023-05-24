@@ -27,6 +27,19 @@ function AllPost() {
             </div>
           ))
         }
+        {
+          posts?.map((pos)=>(
+            <div key={pos._id} className='bg-white flex flex-row p-5 shadow-xl rounded-md'>
+              <div className='flex-1 flex flex-col'>
+                <h1 className='text-lg font-medium'>{pos.title}</h1>
+                <p>{pos.content}</p>
+              </div>
+              <div className='flex items-end justify-center'>
+                <p className=''>{format(pos.createdAt)}</p>
+              </div>
+            </div>
+          ))
+        }
     </div>
   )
 }
