@@ -23,7 +23,7 @@ function EditTeacher() {
         e.preventDefault();
         const Sclass = [];
         Sclass.push(selectedClass);
-        console.log(selectedClass);
+        console.log(Sclass);
         const {data} = instance.post(updateTeacherRoute,{
             email,lName,fName,phone,class:Sclass
         });
@@ -103,7 +103,7 @@ function EditTeacher() {
               <option value={0}>Select Class</option>
               {
                 ClassData.map((clas)=>(
-                  <option value={clas} key={clas._id}>{clas.class}</option>
+                  <option value={clas.class} key={clas._id}>{clas.class}</option>
                 ))
               }
             </select>

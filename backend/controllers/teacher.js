@@ -1,14 +1,13 @@
 const teacher = require('../models/teacher')
 
-async function createTeacher(email, fName, lName, phone) {
+async function createTeacher(email, fName, lName, phone, clas) {
     let createdOrNot
     await teacher.create({
         email: email,
         fName: fName,
         lName: lName,
         phone: phone,
-        class: []
-
+        class: clas
     })
         .then(() => {
             createdOrNot = true
@@ -20,13 +19,14 @@ async function createTeacher(email, fName, lName, phone) {
     return createdOrNot
 }
 
-async function updateTeacher(email, fName, lName, phone) {
+async function updateTeacher(email, fName, lName, phone, clas) {
     let docs
     await teacher.updateOne({ email: email },
         {
             fName: fName,
             lName: lName,
-            phone: phone
+            phone: phone,
+            class: clas
         })
         .then((e) => {
             docs = e
