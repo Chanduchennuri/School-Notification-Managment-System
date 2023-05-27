@@ -9,7 +9,6 @@ function Teacher() {
     const navigate = useNavigate();
     const getData = async () => {
         const {data} = await instance.get(getTeacherRoute);
-        console.log(data)
         setTeacherDetails(data);
     }
     useEffect(()=>{

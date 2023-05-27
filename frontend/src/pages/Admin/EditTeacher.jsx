@@ -9,8 +9,6 @@ function EditTeacher() {
     const [fName, setfName] = useState("");
     const [lName, setlName] = useState("");
     const [phone, setPhone] = useState("");
-    const [ClassData, setClass] = useState([]);
-    const [selectedClass,setSelectedClass] = useState("");
     const [searchParams,setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const id = searchParams.get('id');
@@ -21,28 +19,17 @@ function EditTeacher() {
     }
     const FormSubmitHandler = (e) =>{
         e.preventDefault();
-        const Sclass = [];
-        Sclass.push(selectedClass);
-        console.log(Sclass);
         const {data} = instance.post(updateTeacherRoute,{
-            email,lName,fName,phone,class:Sclass
+            email,lName,fName,phone
         });
-        console.log(data)
         navigate('/admin/teacher');
     }
     useEffect(()=>{
-        instance.get(getClassRoute).
-        then((result)=>{
-          console.log(result);
-          setClass(result.data);
-        })
         getData().then((result)=>{
-            console.log(result);
             setEmail(result.email)
             setfName(result.fName);
             setlName(result.lName);
             setPhone(result.phone);
-            setSelectedClass(result.class[0]);
         });
     },[])
   return (
@@ -94,19 +81,6 @@ function EditTeacher() {
               placeholder="Enter Email"
               className="outline-none w-[400px] rounded-md placeholder:text-gray-300 p-2 bg-[#9BA4B5]"
             />
-          </div>
-          <div className="flex flex-col mx-4">
-            <label>
-              Class<span className="text-red-800">*</span>
-            </label>
-            <select value={selectedClass} onChange={(e)=>setSelectedClass(e.target.value)} className="outline-none w-[400px] rounded-md placeholder:text-gray-300 p-2 bg-[#9BA4B5]">
-              <option value={0}>Select Class</option>
-              {
-                ClassData.map((clas)=>(
-                  <option value={clas.class} key={clas._id}>{clas.class}</option>
-                ))
-              }
-            </select>
           </div>
           <div className="flex gap-4 p-5">
             <button

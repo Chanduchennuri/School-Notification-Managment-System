@@ -27,14 +27,12 @@ router.post('/teacher/create', async (req, res) => {
         if (req.body.email &&
             req.body.fName &&
             req.body.lName &&
-            req.body.phone &&
-            req.body.class) {
+            req.body.phone ) {
             const { createTeacher } = require('../controllers/teacher')
             const createdOrNot = await createTeacher(req.body.email,
                 req.body.fName,
                 req.body.lName,
-                req.body.phone,
-                req.body.class)
+                req.body.phone)
             if (createdOrNot === true) {
                 res.json({ msg: 'Teacher Created Successfully.' })
             }
@@ -58,12 +56,12 @@ router.post('/teacher/update', async (req, res) => {
         if (req.body.email &&
             req.body.fName &&
             req.body.lName &&
-            req.body.phone && req.body.class) {
+            req.body.phone ) {
             const { updateTeacher } = require('../controllers/teacher')
             const docs = await updateTeacher(req.body.email,
                 req.body.fName,
                 req.body.lName,
-                req.body.phone, req.body.class)
+                req.body.phone)
             if (docs) {
                 res.json({ msg: 'Teacher Updated Successfully.' })
             }

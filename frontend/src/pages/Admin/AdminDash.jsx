@@ -12,7 +12,6 @@ function AdminDash({ user }) {
   }
   useEffect(() => {
     instance.get(getTeacherRoute).then((res) => {
-      console.log(res.data);
       setTeachers(res.data);
     });
   }, []);
