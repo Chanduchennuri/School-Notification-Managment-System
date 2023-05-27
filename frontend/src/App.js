@@ -37,7 +37,7 @@ function App() {
   }
   useEffect(()=>{
     getUser();
-  },[user])
+  },[])
   
   
   return (

@@ -18,7 +18,7 @@ function Post({ user }) {
   return (
     <div className="h-screen w-screen flex flex-col bg-[#F1F6F9]">
       <header className="bg-[#212A3E] text-[#F1F6F9] flex items-start justify-between p-4">
-        <button>
+        <button onClick={()=>navigate('/teacher')}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
