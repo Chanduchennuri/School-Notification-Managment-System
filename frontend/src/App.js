@@ -23,15 +23,23 @@ import Post from './pages/Teacher/Post';
 import StudentDash from './pages/Student/StudentDash'
 import Feed from './pages/Student/Feed'
 
+import { useNavigate } from "react-router-dom";
+
 function App() {
   const [user,setUser] = useState({});
+  const [flag,setFlag] = useState(false);
   const getUser = async() => {
     const {data} = await instance.get(getUserRoute);
     setUser(data);
+    // if(data?.email != user?.email){
+    //   setFlag(!flag)
+    // }
   }
   useEffect(()=>{
     getUser();
   },[user])
+  
+  
   return (
     <div>
       <Routes>
