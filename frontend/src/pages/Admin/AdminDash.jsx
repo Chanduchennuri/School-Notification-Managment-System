@@ -20,11 +20,9 @@ function AdminDash({ user }) {
       setTeachers(res.data);
     });
     instance.get(getStudentRoute).then((res) => {
-      console.log(res.data);
       setStudents(res.data);
     });
     instance.get(getClassRoute).then((res) => {
-      console.log(res.data);
       setClasses(res.data);
     });
   }, []);

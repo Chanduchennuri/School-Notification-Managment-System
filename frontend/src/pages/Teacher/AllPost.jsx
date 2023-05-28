@@ -11,7 +11,7 @@ function AllPost() {
   }
   useEffect(()=>{
     getPosts();
-  },[])
+  },[posts])
   return (
     <div className='flex-1 grid grid-cols-1 sm:grid-cols-3 gap-5 justify-center items-start overflow-x-hidden over-y-auto h-full w-full'>
         {

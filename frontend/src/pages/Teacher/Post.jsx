@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createPostRoute, getClassRoute } from "../../API/Routes";
+import { createPostRoute } from "../../API/Routes";
 import instance from "../../util/instance";
 import { useNavigate } from "react-router";
 
