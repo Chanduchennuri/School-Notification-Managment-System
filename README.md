@@ -45,11 +45,48 @@ Student Dashboard In-App Notification:
 
 
 <h3>Description</h3>
-<p>Explain what you have build in the most detailed way</p>
+<p>The project we have built is the "Notification Management System for School". </p>
+<p>
+The system includes an admin module for managing teachers, classes, and student data. </p>
+<p>
+Teachers can send posts to their assigned classes, while students and parents can access these posts through their respective modules. </p>
+<p>
+It aims to In-app and email notifications ensure timely updates. This system streamlines communication and improves engagement within the school community. The system consists of several interconnected modules that work together to achieve its intended purpose.
+</p>
+
+<h3>Architecture</h3>
+<p>It is build using MERN stack and integrated the novu notification API for in-app and email notifications.</p>
+<p>
+For authentication, we have used o-auth-google authentication and session. After getting the session the user gets redirected to its corresponding section.</p>
+<p>
+We have created user-friendly interface to interact and feel attractive towards it.
+</p>
+<ul>
+  <li>Admin 
+    <ul>
+      <li>In admin section, we can add and update the teachers, classes and students.</li>
+    </ul>
+  </li>
+  <li>Teacher 
+    <ul>
+      <li>In Teacher section, teacher can add the post and it will generate the notification to students and parents.</li>
+      <li>Teacher can create post for their respective class / classes only.</li>
+    </ul>
+  </li>
+  <li>Student / Parent  
+    <ul>
+      <li>In this section, students or parents can see the latest post created in class they are assigned to.</li>
+      <li>Also an In-App Notification from NOVU will be shown here.</li>
+    </ul>
+  </li>
+</ul>
 
 
 <h3>Who are you?</h3>
-<p>Give us your best description who are you, and why you have decided to build this project</p>
+<p>We are a dynamic duo pursuing our Bachelor's in Computer Engineering. With a shared passion for education and technology, we have developed the "Notification Management System for School" project. Our aim is to streamline communication between administrators, teachers, students, and parents through an intuitive platform. By leveraging our technical expertise and dedication, we strive to enhance the learning experience and promote collaboration within schools.</p>
 
-<h3>Additional Resources/Info</h3>
-<p>If you have</p>
+<h3>Conclusion</h3>
+<p>With its intuitive user interface, the School Management System ensures ease of use and accessibility for all users. It allows users to navigate through the system seamlessly, perform tasks efficiently, and retrieve information quickly. The system incorporates security measures to safeguard sensitive data, ensuring the privacy and confidentiality of student and staff information.</p>
+<p>
+Through its well-structured architecture and feature-rich functionalities, the system offers a range of benefits for students, teachers, administrators, and parents.
+</p>
