@@ -7,7 +7,10 @@ function AllPost() {
   const [posts,setPosts] = useState(null);
   const getPosts = async() => {
     const {data} = await instance.get(GetPostRoute);
-    setPosts(data);
+    if(!posts){
+      setPosts(data);
+
+    }
   }
   useEffect(()=>{
     getPosts();
